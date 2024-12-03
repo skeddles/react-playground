@@ -9,6 +9,7 @@ export default function TicTacToe() {
 	const [turnIsX, setTurnIsX] = useState(true);
 	const [gameIsOver, setGameIsOver] = useState(false);
 	const [turnBlurb, setTurnBlurb] = useState('X goes first!');
+	const [winPosition, setWinPosition] = useState<number | null>(null);
 
 	function clicked (i:number) {
 		if (cells[i] || gameIsOver) return;
@@ -21,9 +22,12 @@ export default function TicTacToe() {
 		setCells(updatedCells);
 		setTurnBlurb(BLURBS[Math.floor(Math.random() * BLURBS.length)].replace('X', turnIsX ? 'O' : 'X'));
 
-		if (calculateWinner(updatedCells)) {
-			setTurnBlurb(calculateWinner(updatedCells) + ' wins!');
+		const winner = calculateWinner(updatedCells);
+
+		if (winner.name) {
+			setTurnBlurb(winner.name + ' wins!');
 			setGameIsOver(true);
+			setWinPosition(winner.position);
 			return;
 		}
 
@@ -39,6 +43,7 @@ export default function TicTacToe() {
 		setTurnIsX(true);
 		setTurnBlurb('X goes first!');
 		setGameIsOver(false);
+		setWinPosition(null);
 	}
 
 	return (<>
@@ -47,7 +52,7 @@ export default function TicTacToe() {
 			Click on a cell to begin playing.
 		</p>	
 		<div className='turnBlurb'>{turnBlurb}</div>
-		<div className='game'>
+		<div className={'game' + (gameIsOver ? (' gameOver w'+winPosition) : '')}>
 			<Cell id={0} value={cells[0]} clickedCell={clicked} gameOver={gameIsOver}/>
 			<Cell id={1} value={cells[1]} clickedCell={clicked} gameOver={gameIsOver}/>
 			<Cell id={2} value={cells[2]} clickedCell={clicked} gameOver={gameIsOver}/>
@@ -61,27 +66,35 @@ export default function TicTacToe() {
 		<div className="controls">
 			<button onClick={reset}>Reset</button>
 		</div>
+		<div className="debug">
+			<pre>{JSON.stringify({cells,turnIsX,gameIsOver,turnBlurb,winPosition}, null, 2)}</pre>
+		</div>
 	</>);
 }
 
 function calculateWinner(squares:Array<string|null>) {
 	const lines = [
+		//horizontal
 		[0, 1, 2],
 		[3, 4, 5],
 		[6, 7, 8],
+
+		//vertical
 		[0, 3, 6],
 		[1, 4, 7],
 		[2, 5, 8],
+
+		//diagonal
 		[0, 4, 8],
 		[2, 4, 6]
 	];
 	for (let i = 0; i < lines.length; i++) {
 		const [a, b, c] = lines[i];
 		if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-			return squares[a];
+			return {won: true, name: squares[a], position: i};
 		}
 	}
-	return null;
+	return {won: false, name: null, position: null};
 }
 
 
