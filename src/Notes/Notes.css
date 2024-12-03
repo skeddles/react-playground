@@ -1,0 +1,16 @@
+
+.notes {
+	h1, h2, h3, h4, h5, h6 {
+		&:before {
+			content: '';
+			width: 0;
+			height: 0;
+			border-top: 0.5rem solid transparent;
+			border-bottom: 0.5rem solid transparent;
+			border-left: 1rem solid var(--bg-light);
+			position: absolute;
+			left: -2rem;
+			top: 25%;
+		}
+	}
+}

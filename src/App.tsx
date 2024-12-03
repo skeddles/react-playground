@@ -1,27 +1,13 @@
 
-import { BrowserRouter as Router, Route, Routes, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Routes } from "react-router-dom";
 import './App.css';
 import './layout.css';
 import './defaults.css';
-import Home from './Home/Home';
-import Idle from './Idle/Idle';
-import Notes from './Notes/Notes';
+import {pageRoutes, navigationLinks} from './pages';
 
-const pages: { [key: string]: JSX.Element } = {
-	Home: (<Home/>),
-	Notes: (<Notes/>),
-	Idle: (<Idle/>),
-};
 
 function App() {
 
-    const navigationLinks = Object.keys(pages).map((page) => {
-        return <NavLink to={'/'+slugify(page)} className={({ isActive }) => isActive ? 'active' : ''}>{page}</NavLink>
-    });
-
-	const pageRoutes = Object.keys(pages).map((page) => {
-		return <Route path={'/'+slugify(page)} element={pages[page]} />
-	});
 
 	return (<Router>
 
@@ -42,10 +28,5 @@ function App() {
 
 	</Router>)
 }
-
-function slugify(str: string) {
-	return str.toLowerCase().replace(/ /g, "-");
-}
-
 
 export default App;

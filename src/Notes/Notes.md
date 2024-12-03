@@ -1,6 +1,8 @@
 
 # Notes
 
+This is just some notes on React, for my own reference. Not you. Stop looking at my notes.
+
 ## Conditional Rendering
 
 ```

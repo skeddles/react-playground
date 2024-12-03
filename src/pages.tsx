@@ -21,5 +21,6 @@ export const pageRoutes = Object.keys(pages).map((page) => {
 });
 
 function slugify(str: string) {
+	if (str === 'Home') return '';
 	return str.toLowerCase().replace(/ /g, "-");
 }
