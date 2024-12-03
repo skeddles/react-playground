@@ -1,3 +1,9 @@
+# skeddles react playground
+
+just a pointless site that I'm using to learn react
+
+live: https://github.com/skeddles/react-playground
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
