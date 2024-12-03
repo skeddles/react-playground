@@ -4,6 +4,7 @@
 	font-weight: 900;
 	text-align: center;
 	margin: 1em 0;
+	user-select: none;
 }
 
 .game {
@@ -20,6 +21,8 @@
 	padding: 0.5em;
 	box-sizing: border-box;
 	position: relative;
+
+	user-select: none;
 
 	.cell {
 		flex-basis: calc(33.3333% - 0.5em);
@@ -84,6 +87,7 @@
 	margin: 0 auto;
 	position: relative;
 	border-radius: 0 0 1em 1em ;
+	user-select: none;
 
 	&::after {
 		content: '';
@@ -104,6 +108,7 @@
 .controls {
 	margin: 2em auto;
 	text-align: center;
+	user-select: none;
 }
 
 .debug {
@@ -116,7 +121,7 @@
 
 @keyframes showLine {
 	0% {
-		width: 0;
+		width: 0px;
 	}
 	100% {
 		width: 380px;
