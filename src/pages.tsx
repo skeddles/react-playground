@@ -15,11 +15,11 @@ export const pages: { [key: string]: JSX.Element } = {
 
 
 export const navigationLinks = Object.keys(pages).map((page) => {
-	return <NavLink to={'/'+slugify(page)} className={({ isActive }) => isActive ? 'active' : ''}>{page}</NavLink>
+	return <NavLink key={page} to={'/'+slugify(page)} className={({ isActive }) => isActive ? 'active' : ''}>{page}</NavLink>
 });
 
 export const pageRoutes = Object.keys(pages).map((page) => {
-	return <Route path={'/'+slugify(page)} element={pages[page]} />
+	return <Route key={page} path={'/'+slugify(page)} element={pages[page]} />
 });
 
 function slugify(str: string) {
