@@ -12,12 +12,17 @@ export default function Idle() {
 
 	const game = {Gold, setGold, Stone, setStone, Wood, setWood, Food, setFood, Houses, setHouses};
 
-	return (<div className="idle">
-		<Resource game={game} name="Gold" verb="Mine" icon="🟡" cost={0}/>
-		<Resource game={game} name="Stone" verb="Mine" icon="⚪" cost={0}/>
-		<Resource game={game} name="Wood" verb="Chop" icon="🟤" cost={0}/>
-		<Resource game={game} name="Food" verb="Farm" icon="🔴" cost={0}/>
+	return (<>
+		<h1> Idle Game </h1>
+		<p>Still working on it! Not a game yet!</p>
+		
+		<div className="idle">
+			<Resource game={game} name="Gold" verb="Mine" icon="🟡" cost={0}/>
+			<Resource game={game} name="Stone" verb="Mine" icon="⚪" cost={0}/>
+			<Resource game={game} name="Wood" verb="Chop" icon="🟤" cost={0}/>
+			<Resource game={game} name="Food" verb="Farm" icon="🔴" cost={0}/>
 
-		<Resource game={game} name="Houses" verb="Buy" icon="🏠" cost={10} generates="Gold" rate={1}/>
-	</div>);
+			<Resource game={game} name="Houses" verb="Buy" icon="🏠" cost={10} generates="Gold" rate={1}/>
+		</div>
+	</>);
 }
