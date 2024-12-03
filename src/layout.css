@@ -14,7 +14,8 @@
 	
 	header {
 		background: var(--bg-dark);
-		padding: 1em;
+		padding: 1em 1em 0;
+		user-select: none;
 	
 		h1 {
 			width: 800px;
@@ -24,13 +25,33 @@
 	
 		nav {
 			width: 800px;
-			margin: 1em auto;
+			margin: 1em auto 0;
+			display: flex;
 		
 			a {
+				display: inline-block;
 				font-size: 1.2em;
 				font-weight: bold;
 				display: inline-block;
-				margin-right: 1em;
+				margin: 0;
+				padding: 1em 2em;
+				transition: all 0.1s;
+				color: var(--fg-dark);
+				text-decoration: none;
+				border-radius: 0.5em 0.5em 0 0;
+
+				&:hover:not(.active) {
+					background-color: var(--brand);
+					color: var(--fg-lighter);
+					transform: scale(1.1) rotate(5deg);
+					text-decoration: none;
+					border-radius: 0.5em;
+				}
+
+				&.active {
+					background: var(--bg);
+					color: var(--fg-light);
+				}
 			}
 		}
 	}
@@ -39,6 +60,10 @@
 		background: var(--bg-dark);
 		padding: 1em;
 		text-align: center;
+		font-weight: 900;
+		color: var(--bg);
+		letter-spacing: 1em;
+		user-select: none;
 	}
 	
 	.spacer {

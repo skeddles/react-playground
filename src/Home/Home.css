@@ -1,0 +1,30 @@
+.homepagelist {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 4em -1em;
+
+	a {
+		display: inline-flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		font-size: 1.5em;
+		height: 4em;
+		min-width: 6em;
+		background-color: var(--bg-lighter);
+		font-weight: 900;
+		border-radius: 0.5em;
+		padding: 1em 2em;
+		margin: 0.5em;
+		box-shadow: 0 0.125em 0 var(--bg-dark);
+		transition: all 0.2s;
+
+		&:hover {
+			background-color: var(--brand);
+			color: var(--fg-lighter);
+			transform: scale(1.1) rotate(5deg);
+			text-decoration: none;
+			border-radius: 0.5em;
+		}
+	}
+}
