@@ -43,15 +43,22 @@ Pass a reference to a function directly to an even handler on the elements:
 
 Forget variables. No such thing. Everything is a constant, unless it's temporary.
 
-### State
+## Hooks
+
+Intead of normal things, we use functions called **HOOKS**, which always start with `use`.
+
+**useState()**, **useEffect()**, **useContext()**, **useReducer()**, **useRef()**, **useMemo()**, **useCallback()**
+
+### useState() Hook Function
 If you need variables, use state instead. 
 
 ```
 import { useState } from 'react';
-()=>{
-	const [count, setCount] = useState(0);
-}
+()=>{  const [count, setCount] = useState(0);  }
 ```
 you always declare it with a const for the variable and setter function.
 
 these states are unique to each instance of the component, and not accessible from other components.
+
+### useContext() Hook Function
+Now here is where you can share values between components (without having to pass it as a prop).
