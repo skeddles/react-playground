@@ -12,7 +12,10 @@ function App() {
 	return (<Router>
 
 			<header>
-				<h1>skeddles' react playground</h1>
+				<h1>
+					skeddles' react playground 
+					<a href="https://github.com/skeddles/react-playground" target="_blank"><img src="/github.svg" alt="github" /></a>
+				</h1>
 				<nav>{navigationLinks}</nav>
 			</header>
 
