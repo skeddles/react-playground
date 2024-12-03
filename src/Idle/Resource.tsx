@@ -41,9 +41,9 @@ export default function Resource({game, name, verb, icon, cost, generates, rate}
 		if(generates && rate) {
 			let timeSinceLastReward = Date.now();
 			setInterval(() => {
-				//if(timeSinceLastReward+1000*rate < Date.now()) {
+				if(timeSinceLastReward+1000*rate < Date.now()) {
 					generatesFunction(generatesCount+rate);
-				//}
+				}
 			}, 1000);
 		}
 	});
