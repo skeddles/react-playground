@@ -77,6 +77,30 @@
 	/* tie */ &.gameOver.wnull:after { display: none;}
 }
 
+.progressBar {
+	background-color: var(--bg-darker);
+	width: 16em;
+	height: 2em;
+	margin: 0 auto;
+	position: relative;
+	border-radius: 0 0 1em 1em ;
+
+	&::after {
+		content: '';
+		display: block;
+		height: 1em;
+		position: absolute;
+		top: 0;
+		left: 1.25em;
+		border-radius: 0 0 0.5em 0.5em;
+		background-color: var(--bg-dark);
+		width: calc(var(--progress) - 4.25em);
+		animation: progress 2s infinite;
+		animation-timing-function: linear;
+		animation-timing-function: linear;
+	}
+}
+
 .controls {
 	margin: 2em auto;
 	text-align: center;

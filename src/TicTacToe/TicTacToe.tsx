@@ -14,7 +14,6 @@ export default function TicTacToe() {
 	function clicked (i:number) {
 		if (cells[i] || gameIsOver) return;
 
-
 		console.log('clicked');
 		const updatedCells = [...cells];
 		updatedCells[i] = turnIsX ? 'X' : 'O';
@@ -46,6 +45,11 @@ export default function TicTacToe() {
 		setWinPosition(null);
 	}
 
+	function progress() {
+		const total = cells.filter(c => c).length + 1;
+		return (total / 9) * 100;
+	}
+
 	return (<>
 		<h1>Tic Tac Toe</h1>
 		<p>
@@ -63,6 +67,8 @@ export default function TicTacToe() {
 			<Cell id={7} value={cells[7]} clickedCell={clicked} gameOver={gameIsOver}/>
 			<Cell id={8} value={cells[8]} clickedCell={clicked} gameOver={gameIsOver}/>
 		</div>
+        <div className="progressBar" style={{ '--progress': `${progress()}%` } as React.CSSProperties}></div>
+
 		<div className="controls">
 			<button onClick={reset}>Reset</button>
 		</div>
