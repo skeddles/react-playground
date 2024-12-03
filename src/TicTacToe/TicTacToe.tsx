@@ -5,7 +5,7 @@ import './TicTacToe.css';
 
 export default function TicTacToe() {
 
-	const [cells, setCells] = useState([null, null, null, null, null, null, null, null, null]);
+	const [cells, setCells] = useState<(null | 'X' | 'O')[]>([null, null, null, null, null, null, null, null, null]);
 	const [turnIsX, setTurnIsX] = useState(true);
 	const [gameIsOver, setGameIsOver] = useState(false);
 	const [turnBlurb, setTurnBlurb] = useState('X goes first!');
