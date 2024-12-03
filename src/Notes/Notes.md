@@ -3,6 +3,11 @@
 
 This is just some notes on React, for my own reference. Not you. Stop looking at my notes.
 
+
+## Immutability
+
+React prefers immutability, which means constant variables that don't change, and functions that don't change any data outside of their scope, except with hooks. 
+
 ## Conditional Rendering
 
 ```
@@ -51,8 +56,10 @@ Intead of normal things, we use functions called **HOOKS**, which always start w
 
 **useState()**, **useEffect()**, **useContext()**, **useReducer()**, **useRef()**, **useMemo()**, **useCallback()**
 
-### useState() Hook Function
+### States / useState() Hook Function
 If you need variables, use state instead. 
+
+These are smarter than variables because the ui can be updated without changing it, and when they update the UI automatically updates.
 
 ```
 import { useState } from 'react';
@@ -62,5 +69,16 @@ you always declare it with a const for the variable and setter function.
 
 these states are unique to each instance of the component, and not accessible from other components.
 
-### useContext() Hook Function
-Now here is where you can share values between components (without having to pass it as a prop).
+## Refs / useRef() Hook Function
+
+Refs are like states, but aren't used for display, so they don't trigger any rerendering when they change.
+
+These are good for when you need to do non-react things.
+
+## Effects / useEffect() Hook Function
+
+Effects connect to external systems.
+
+### Contexts / useContext() Hook Function
+Now here is where you can share values between components.
+You can also do this just by "lifting the state up" (putting states in a shared parent component) and then passing them down as props, but it can get messy fast.

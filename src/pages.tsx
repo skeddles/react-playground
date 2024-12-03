@@ -4,10 +4,12 @@ import {Route, NavLink} from "react-router-dom";
 import Home from './Home/Home';
 import Idle from './Idle/Idle';
 import Notes from './Notes/Notes';
+import TicTacToe from './TicTacToe/TicTacToe';
 
 export const pages: { [key: string]: JSX.Element } = {
 	Home: (<Home/>),
 	Notes: (<Notes/>),
+	TicTacToe: (<TicTacToe/>),
 	Idle: (<Idle/>),
 };
 
