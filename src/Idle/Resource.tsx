@@ -1,10 +1,7 @@
 
 
 
-
-// resource props
-
-import { useEffect } from "react";
+//import { useEffect } from "react";
 
 interface ResourceProps {
 	game: {
@@ -25,8 +22,6 @@ export default function Resource({game, name, verb, icon, cost, generates, rate}
 	const count:number = (game as any)[name];
 	const setFunction = (game as any)['set'+name];
 
-	const generatesCount = generates ? (game as any)[generates] : undefined;
-	const generatesFunction = generates ? (game as any)['set'+generates] : undefined;
 
 	function buy() {
 		if(game.Gold >= cost) {
@@ -36,17 +31,19 @@ export default function Resource({game, name, verb, icon, cost, generates, rate}
 	}
 
 	
-	
-	useEffect(() => {
-		if(generates && rate) {
-			let timeSinceLastReward = Date.now();
-			setInterval(() => {
-				if(timeSinceLastReward+1000*rate < Date.now()) {
-					generatesFunction(generatesCount+rate);
-				}
-			}, 1000);
-		}
-	});
+	// const generatesCount = generates ? (game as any)[generates] : undefined;
+	// const generatesFunction = generates ? (game as any)['set'+generates] : undefined;
+
+	// useEffect(() => {
+	// 	if(generates && rate) {
+	// 		let timeSinceLastReward = Date.now();
+	// 		setInterval(() => {
+	// 			if(timeSinceLastReward+1000*rate < Date.now()) {
+	// 				generatesFunction(generatesCount+rate);
+	// 			}
+	// 		}, 1000);
+	// 	}
+	// });
 	
 
 	return (<div className="resource">
@@ -56,7 +53,7 @@ export default function Resource({game, name, verb, icon, cost, generates, rate}
 				<div>Owned:</div>
 				x{count}
 			</div>
-			<button onClick={buy} className={game.Gold>cost?'':'disabled'}>{verb}</button>
+			<button onClick={buy} className={game.Gold>=cost?'':'disabled'}>{verb}</button>
 			<div className="cost">
 				<div>Cost:</div>
 				{cost===0?'Free':'🟡'+cost}

@@ -18,6 +18,6 @@ export default function Idle() {
 		<Resource game={game} name="Wood" verb="Chop" icon="🟤" cost={0}/>
 		<Resource game={game} name="Food" verb="Farm" icon="🔴" cost={0}/>
 
-		<Resource game={game} name="Houses" verb="Buy" icon="🏠" cost={40} generates="Gold" rate={1}/>
+		<Resource game={game} name="Houses" verb="Buy" icon="🏠" cost={10} generates="Gold" rate={1}/>
 	</div>);
 }
