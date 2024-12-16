@@ -8,6 +8,10 @@ This is just some notes on React, for my own reference. Not you. Stop looking at
 
 React prefers immutability, which means constant variables that don't change, and functions that don't change any data outside of their scope, except with hooks. 
 
+This means you should always create new Arrays and Objects instead of modifying them.
+
+This lets the old data remain, and it can be used to compare or revert, and prevents less unexpected bugs.
+
 ## Conditional Rendering
 
 ```
