@@ -54,6 +54,8 @@ Pass a reference to a function directly to an even handler on the elements:
 
 Forget variables. No such thing. Everything is a constant, unless it's temporary.
 
+You can use constants that get calculated in the react function, because they get recalculated every time the component gets rerendered.
+
 ## Hooks
 
 Intead of normal things, we use functions called **HOOKS**, which always start with `use`.

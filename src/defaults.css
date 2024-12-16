@@ -61,11 +61,8 @@ strong {
 .page {
 	h1, h2 {
 		color: var(--fg-lighter);
-		margin-top: 3em;
 		position: relative;
-
 	}
-
 
 	h3, h4, h5, h6 {
 		color: var(--fg-light);
