@@ -11,6 +11,9 @@ export default function TicTacToe() {
 	const [turnBlurb, setTurnBlurb] = useState('X goes first!');
 	const [winPosition, setWinPosition] = useState<number | null>(null);
 
+	const [history, setHistory] = useState<(null | 'X' | 'O')[][]>([cells]);
+	const [historyPosition, setHistoryPosition] = useState(0);
+
 	function clicked (i:number) {
 		if (cells[i] || gameIsOver) return;
 
@@ -21,19 +24,33 @@ export default function TicTacToe() {
 		setCells(updatedCells);
 		setTurnBlurb(BLURBS[Math.floor(Math.random() * BLURBS.length)].replace('X', turnIsX ? 'O' : 'X'));
 
+		const newHistory = history.slice(0, historyPosition+1);
+		newHistory.push(updatedCells);
+
+		setHistory(newHistory);
+		setHistoryPosition(newHistory.length-1);
+
+		checkForEndGame(updatedCells);
+	}
+
+	function checkForEndGame(updatedCells:(null | 'X' | 'O')[]) {
 		const winner = calculateWinner(updatedCells);
+		console.log('winner', winner);
 
 		if (winner.name) {
 			setTurnBlurb(winner.name + ' wins!');
 			setGameIsOver(true);
 			setWinPosition(winner.position);
-			return;
 		}
 
-		if (updatedCells.includes(null) === false) {
+		else if (updatedCells.includes(null) === false) {
 			setTurnBlurb('Tie game!');
 			setGameIsOver(true);
-			return;
+		}
+
+		else {
+			setGameIsOver(false);
+			setWinPosition(null);
 		}
 	}
 	
@@ -43,12 +60,34 @@ export default function TicTacToe() {
 		setTurnBlurb('X goes first!');
 		setGameIsOver(false);
 		setWinPosition(null);
+		setHistory([cells]);
+		setHistoryPosition(0);
 	}
 
 	function progress() {
 		const total = cells.filter(c => c).length + 1;
 		return (total / 9) * 100;
 	}
+
+	function undo () {
+		setHistoryPosition(historyPosition - 1);
+		setCells(history[historyPosition-1]);
+		checkForEndGame(history[historyPosition-1]);
+		setTurnIsX(!turnIsX);
+		setTurnBlurb(BLURBS[Math.floor(Math.random() * BLURBS.length)].replace('X', turnIsX ? 'O' : 'X'));
+	}
+
+	function redo () {
+		setHistoryPosition(historyPosition + 1);
+		setCells(history[historyPosition+1]);
+		checkForEndGame(history[historyPosition+1]);
+		setTurnIsX(!turnIsX);
+		setTurnBlurb(BLURBS[Math.floor(Math.random() * BLURBS.length)].replace('X', turnIsX ? 'O' : 'X'));
+	}
+
+	const canUndo = historyPosition > 0;
+	const canRedo = historyPosition < history.length - 1;
+	const canReset = history.length > 1;
 
 	return (<>
 		<h1>Tic Tac Toe</h1>
@@ -70,10 +109,12 @@ export default function TicTacToe() {
         <div className="progressBar" style={{ '--progress': `${progress()}%` } as React.CSSProperties}></div>
 
 		<div className="controls">
-			<button onClick={reset}>Reset</button>
+			<button onClick={undo} disabled={!canUndo}>Undo</button>
+			<button onClick={redo} disabled={!canRedo}>Redo</button>
+			<button onClick={reset} disabled={!canReset}>Reset</button>
 		</div>
 		<div className="debug">
-			<pre>{JSON.stringify({cells,turnIsX,gameIsOver,turnBlurb,winPosition}, null, 2)}</pre>
+			<pre>{JSON.stringify({cells,turnIsX,gameIsOver,turnBlurb,winPosition,historyPosition,canUndo,canRedo,canReset,history}, null, 2)}</pre>
 		</div>
 	</>);
 }
