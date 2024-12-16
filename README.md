@@ -2,7 +2,7 @@
 
 just a pointless site that I'm using to learn react
 
-live: https://github.com/skeddles/react-playground
+live: https://skeddles-react-playground.netlify.app/
 
 # React + TypeScript + Vite
 
