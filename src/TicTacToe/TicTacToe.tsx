@@ -2,10 +2,11 @@ import { useState } from 'react';
 import Cell from './Cell';
 import './TicTacToe.css';
 
+const EMPTY_CELLS = [null, null, null, null, null, null, null, null, null];
 
 export default function TicTacToe() {
 
-	const [cells, setCells] = useState<(null | 'X' | 'O')[]>([null, null, null, null, null, null, null, null, null]);
+	const [cells, setCells] = useState<(null | 'X' | 'O')[]>(EMPTY_CELLS);
 	const [turnIsX, setTurnIsX] = useState(true);
 	const [gameIsOver, setGameIsOver] = useState(false);
 	const [turnBlurb, setTurnBlurb] = useState('X goes first!');
@@ -55,12 +56,12 @@ export default function TicTacToe() {
 	}
 	
 	function reset() {
-		setCells([null, null, null, null, null, null, null, null, null]);
+		setCells(EMPTY_CELLS);
 		setTurnIsX(true);
 		setTurnBlurb('X goes first!');
 		setGameIsOver(false);
 		setWinPosition(null);
-		setHistory([cells]);
+		setHistory([EMPTY_CELLS]);
 		setHistoryPosition(0);
 	}
 
