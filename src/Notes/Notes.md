@@ -3,14 +3,40 @@
 
 This is just some notes on React, for my own reference. Not you. Stop looking at my notes.
 
+## Important Principles
 
-## Immutability
+### Immutability
 
 React prefers immutability, which means constant variables that don't change, and functions that don't change any data outside of their scope, except with hooks. 
 
 This means you should always create new Arrays and Objects instead of modifying them.
 
 This lets the old data remain, and it can be used to compare or revert, and prevents less unexpected bugs.
+
+### Single Responsibility Principle
+
+A component should do one thing, and one thing only. If it grows into multiple things, it should be broken down into multiple components.
+
+### Data Static Dynamic
+
+A good process is to start with the static data your app will need, then design static components that display all the data, then at the end make all the components be able to change the data.
+
+In simpler projects, it's better to start with the topmost components, and work your way down, but in large projects it can be better to start with the small components and work your way up.
+
+### One Way Data Flow
+
+Data should be managed by the top level component, then flow down the hierarchy to supply the data to the lower components.
+
+You need to choose carefully where to put state. It needs to be in the uppermost common parent of all the components that need it, or higher. If you can't find a good component to hold the state, it can sometimes make sense to create a new component just for the state.
+
+### DRY (Don't Repeat Yourself)
+
+When adding state, you should try to use the minimum amount possible, and avoid repeating anything, or storing any state that isn't absolutely necessary. 
+
+Whenever possible, calculate values on the fly rather than storing them, as you want the simplest state possible.
+
+
+## Syntax
 
 ## Conditional Rendering
 
