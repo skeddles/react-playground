@@ -29,12 +29,6 @@ Data should be managed by the top level component, then flow down the hierarchy 
 
 You need to choose carefully where to put state. It needs to be in the uppermost common parent of all the components that need it, or higher. If you can't find a good component to hold the state, it can sometimes make sense to create a new component just for the state.
 
-### DRY (Don't Repeat Yourself)
-
-When adding state, you should try to use the minimum amount possible, and avoid repeating anything, or storing any state that isn't absolutely necessary. 
-
-Whenever possible, calculate values on the fly rather than storing them, as you want the simplest state possible.
-
 
 ## Syntax
 
@@ -99,17 +93,77 @@ import { useState } from 'react';
 ```
 you always declare it with a const for the variable and setter function.
 
-these states are unique to each instance of the component, and not accessible from other components.
+These states are unique to each instance of the component, and not accessible from other components.
 
-## Refs / useRef() Hook Function
+If the state needs to be read or written by other components, then you need to lift it up to the topmost common parent, then pass it down as props to each component that needs it.
+
+**State values are fixed per render** - When you update a state with it's set function, it doesn't actually change until it rerenders - the current state is static and will remain until the rerender. No matter how long the current function takes to render, even if it has a timeout, the values of it's state will stay the same - each render is like a separate instance with it's own static values for each state.
+
+You can also pass an **updater function** to a state, which will get evaluated:
+
+```
+const [num, setNum] = useState(1);
+function handleClick () {
+	setNum(n=>n+1);
+}
+```
+In this way you actually *can* access the updated value of a state.
+
+All the setter functions get queued and then evaluated after the function is done, but before the next render (including setting to static values and using updater functions).
+
+
+
+#### DRY (Don't Repeat Yourself)
+
+When adding state, you should try to use the minimum amount possible, and avoid repeating anything, or storing any state that isn't absolutely necessary. 
+
+Whenever possible, calculate values on the fly rather than storing them, as you want the simplest state possible.
+
+#### Avoid Impossible States
+
+It shouldn't be possible for a state to represent something that the user should never see.
+
+So if you have popup messages and bool to say if they're visible, it's possible for them both to be true, but they cant both display at once. Instead you should use a state that ensures only valid state values can exist, for example combining these into a single state that says which popup is visible, or can be null if neither is.
+
+This also ties into DRY, because it shouldn't be possible for a two states to conflict. For example don't store a copy of the current history state in one state, and a copy of it in another history state array, instead just store it once in the array and then grab the right one to display.
+
+
+### Reducers / useReducer() Hook Function
+
+Reducers are states that can store / calculate a more complex state object, and avoids having to pass many states down as props.
+
+Instead of setting in an event handler, you dispatch an "action" (an object)
+
+`dispatch({type: 'actionname', arbitrary: 'data'})`
+
+Then you have a reducer function, which recieves those actions and returns an updated state.
+
+`function myReducer(currentReducerState, actionObject) { return {...currentReducerState} }`
+
+You can then create the reducer state by calling `useReducer()` with the reducer function and the initial state.
+
+`const [myState, dispatch] = useReducer(myReducer, initialState);`
+
+#### Why reducers are good: 
+- The reducer function can be moved to it's own file which can make it much cleaner and easier to update. 
+- Reducers can also make components a bit cleaner because they only specify the necessary updated data. 
+- Reducers can be unit tested separately
+
+
+### Refs / useRef() Hook Function
 
 Refs are like states, but aren't used for display, so they don't trigger any rerendering when they change.
 
-These are good for when you need to do non-react things.
+These are good for when you need to track a variable, but it's not used to display something in the UI, but might be used later for something, like responding to user input.
 
-## Effects / useEffect() Hook Function
+### Effects / useEffect() Hook Function
 
-Effects connect to external systems.
+Effects run code.
+
+By default they run after a render. But you can also specific a set of states, and then it only runs when they change.
+
+They can also return a cleanup function, which can undo whatever the effect did (so that it can be safely redone when the effect runs again).
+(for example clearing event listerers or timeouts)
 
 ### Contexts / useContext() Hook Function
 Now here is where you can share values between components.
